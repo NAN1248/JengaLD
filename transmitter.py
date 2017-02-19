@@ -24,18 +24,17 @@ def main():
         print()
         print('Cloud', cloud_mtime)
         print('Local', local_mtime)
-        print('Cloud - local', cloud_mtime - local_mtime)
-        print('Local - cloud', local_mtime - cloud_mtime)
-        print('Delta', datetime.timedelta(seconds = margin))
-        print('l - c > delta', (local_mtime - cloud_mtime) > datetime.timedelta(seconds = margin))
-        print('c - l > delta', (cloud_mtime - local_mtime) > datetime.timedelta(seconds = margin))
+        print('Cloud - Local', cloud_mtime - local_mtime)
+        print('Local - Cloud', local_mtime - cloud_mtime)
+        print('L - C > margin', (local_mtime - cloud_mtime) > datetime.timedelta(seconds = margin))
+        print('C - L > margin', (cloud_mtime - local_mtime) > datetime.timedelta(seconds = margin))
         
         # local check
-        if local_mtime > cloud_mtime and (local_mtime - cloud_mtime) > datetime.timedelta(seconds = margin):
+        if local_mtime - cloud_mtime > datetime.timedelta(seconds = margin):
             uploadsave()
             
         # cloud check
-        if cloud_mtime > local_mtime and (cloud_mtime - local_mtime) > datetime.timedelta(seconds = margin):
+        if cloud_mtime - local_mtime > datetime.timedelta(seconds = margin):
             downloadsave()
         
         # check period
